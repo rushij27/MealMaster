@@ -89,14 +89,14 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## 📬 Contact
 
 - Project Link: https://github.com/rushij27/meal-master
-- Developer: [Rushikesh Jagtap]
+- Developer: [\[Rushikesh Jagtap\]]([linkedin.com/in/rushiikeshjagtap/](https://www.linkedin.com/in/rushiikeshjagtap/))
 - Website: [\[My Website\]](https://rushiikeshjagtap.netlify.app/)
 
 ---
 
 ### Short Description (for GitHub repository)
 
-A modern Vue.js recipe management application featuring smart recipe search, meal planning, and automated shopping lists. Powered by the Spoonacular API, KitchenSync helps you organize your cooking life with ease. 🍳✨
+A modern Vue.js recipe management application featuring smart recipe search, meal planning, and automated shopping lists. Powered by the Spoonacular API, MealPlanner helps you organize your cooking life with ease. 🍳✨
 
 ### Tags
 `vue` `javascript` `recipe-app` `meal-planner` `spoonacular-api` `shopping-list` `cooking` `food` `meal-prep` `recipe-manager`

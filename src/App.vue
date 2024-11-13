@@ -1,85 +1,172 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div class="min-h-screen bg-gray-50 flex flex-col">
+    <!-- Header -->
+    <TheHeader @toggle-sidebar="toggleSidebar" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <!-- Sidebar -->
+    <TheSidebar 
+      :is-open="isSidebarOpen" 
+      @close="closeSidebar" 
+    />
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+    <!-- Main Content -->
+    <main class="flex-grow pt-16 pb-16 lg:pb-0 lg:pl-64">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <router-view v-slot="{ Component }">
+          <transition 
+            name="fade" 
+            mode="out-in"
+          >
+            <component :is="Component" />
+          </transition>
+        </router-view>
+      </div>
+    </main>
 
-  <RouterView />
+    <!-- Mobile Navigation -->
+    <TheNavigation />
+
+    <!-- Footer -->
+    <TheFooter />
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<script setup>
+import { ref } from 'vue'
+import TheHeader from './components/layout/TheHeader.vue'
+import TheFooter from './components/layout/TheFooter.vue'
+import TheSidebar from './components/layout/TheSidebar.vue'
+import TheNavigation from './components/layout/TheNavigation.vue'
+
+const isSidebarOpen = ref(false)
+
+const toggleSidebar = () => {
+  isSidebarOpen.value = !isSidebarOpen.value
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+const closeSidebar = () => {
+  isSidebarOpen.value = false
+}
+</script>
+
+<style>
+/* Base styles */
+:root {
+  --header-height: 4rem;
+  --footer-height: auto;
+  --sidebar-width: 16rem;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+/* Layout transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+/* Sidebar transitions */
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.3s ease-in-out;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(-100%);
 }
 
-nav a:first-of-type {
-  border: 0;
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* Mobile optimization */
+@media (max-width: 1024px) {
+  .main-content {
+    padding-left: 0;
   }
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
   }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+  
+  .main-content {
+    padding: 0 !important;
+    margin: 0 !important;
   }
+}
 
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
+/* Focus outline styles */
+:focus {
+  outline: 2px solid theme('colors.indigo.500');
+  outline-offset: 2px;
+}
 
-    padding: 1rem 0;
-    margin-top: 1rem;
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+  .hover\:bg-gray-100:hover {
+    background-color: transparent;
   }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Common utility classes */
+.flex-center {
+  @apply flex items-center justify-center;
+}
+
+.text-overflow {
+  @apply overflow-hidden text-ellipsis whitespace-nowrap;
+}
+
+.transition-default {
+  @apply transition-all duration-200 ease-in-out;
+}
+
+.card {
+  @apply bg-white rounded-lg shadow-sm p-4;
+}
+
+.btn-reset {
+  @apply appearance-none border-none bg-transparent p-0 m-0 cursor-pointer;
 }
 </style>
