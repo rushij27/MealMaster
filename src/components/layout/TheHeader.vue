@@ -64,11 +64,7 @@
               @click="toggleUserMenu"
               class="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              <img
-                class="h-8 w-8 rounded-full"
-                src="/public/profile.png"
-                alt="User avatar"
-              />
+              <font-awesome-icon :icon="['fas', 'user']" class="h-5 w-5 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-md"/>
             </button>
 
             <!-- Dropdown menu -->

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background -->
+  <circle cx="16" cy="16" r="16" fill="#3B82F6"/>
+  
+  <!-- Plate -->
+  <circle cx="16" cy="16" r="12" fill="white"/>
+  
+  <!-- Fork and spoon -->
+  <g transform="translate(16,16) rotate(-45) translate(-16,-16)">
+    <!-- Fork -->
+    <rect x="14" y="8" width="2" height="16" rx="1" fill="#3B82F6"/>
+    <rect x="11" y="8" width="2" height="6" rx="1" fill="#3B82F6"/>
+    <rect x="17" y="8" width="2" height="6" rx="1" fill="#3B82F6"/>
+    
+    <!-- Spoon -->
+    <rect x="20" y="8" width="2" height="16" rx="1" fill="#3B82F6"/>
+    <circle cx="21" cy="8" r="3" fill="#3B82F6"/>
+  </g>
+</svg>

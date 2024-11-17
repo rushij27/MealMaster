@@ -9,7 +9,9 @@ import './index.css'
 // Import icons if you're using them
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { 
+import {
+  faHome,
+  faBook,
   faSearch, 
   faHeart, 
   faUser, 
@@ -21,6 +23,8 @@ import {
 
 // Add icons to library
 library.add(
+  faHome,
+  faBook,
   faSearch, 
   faHeart, 
   faUser, 

@@ -1,63 +1,81 @@
 <template>
+  <div
+    :class="[
+      'flex items-center justify-center',
+      { 'fixed inset-0 bg-black bg-opacity-50 z-50': overlay }
+    ]"
+  >
     <div
       :class="[
-        'flex items-center justify-center',
-        { 'fixed inset-0 bg-black bg-opacity-50 z-50': overlay }
+        'inline-flex items-center px-4 py-2 rounded-md',
+        { 'bg-white shadow-xl': overlay }
       ]"
     >
-      <div
-        :class="[
-          'inline-flex items-center px-4 py-2 rounded-md',
-          { 'bg-white shadow-xl': overlay }
-        ]"
+      <!-- Updated Spinner -->
+      <svg
+        class="animate-spin text-blue-500"
+        :class="sizeClasses[size]"
+        viewBox="0 0 100 100"
       >
-        <!-- Spinner -->
-        <svg
-          class="animate-spin"
-          :class="sizeClasses[size]"
-          viewBox="0 0 24 24"
+        <!-- Static background circle -->
+        <circle 
+          cx="50" 
+          cy="50" 
+          r="45" 
+          stroke="#E2E8F0"
+          stroke-width="8"
+          fill="none"
+        />
+        
+        <!-- Animated blue arc -->
+        <circle 
+          cx="50" 
+          cy="50" 
+          r="45"
+          stroke="currentColor"
+          stroke-width="8"
+          fill="none"
+          stroke-linecap="round"
+          stroke-dasharray="283,283"
+          stroke-dashoffset="283"
+          class="origin-center"
         >
-          <circle
-            class="opacity-25"
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="currentColor"
-            stroke-width="4"
-            fill="none"
+          <animate
+            attributeName="stroke-dashoffset"
+            values="283;70;283"
+            dur="1.6s"
+            repeatCount="indefinite"
+            keyTimes="0;0.5;1"
           />
-          <path
-            class="opacity-75"
-            fill="currentColor"
-            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-          />
-        </svg>
-  
-        <!-- Text -->
-        <span
-          v-if="text"
-          class="ml-2 text-gray-700"
-        >
-          {{ text }}
-        </span>
-      </div>
+        </circle>
+      </svg>
+
+      <!-- Text -->
+      <span
+        v-if="text"
+        class="ml-3 text-gray-700"
+      >
+        {{ text }}
+      </span>
     </div>
-  </template>
-  
-  <script setup>
-  const props = defineProps({
-    size: {
-      type: String,
-      default: 'md',
-      validator: (value) => ['sm', 'md', 'lg'].includes(value)
-    },
-    overlay: Boolean,
-    text: String
-  })
-  
-  const sizeClasses = {
-    sm: 'h-4 w-4',
-    md: 'h-6 w-6',
-    lg: 'h-8 w-8'
-  }
-  </script>
+  </div>
+</template>
+
+<script setup>
+const props = defineProps({
+  size: {
+    type: String,
+    default: 'md',
+    validator: (value) => ['sm', 'md', 'lg'].includes(value)
+  },
+  overlay: Boolean,
+  text: String
+})
+
+// Updated size classes for the new viewBox dimensions
+const sizeClasses = {
+  sm: 'h-5 w-5',
+  md: 'h-8 w-8',
+  lg: 'h-10 w-10'
+}
+</script>
