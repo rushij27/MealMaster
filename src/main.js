@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
+import AppModal from './components/common/AppModal.vue'
 
 // Import the CSS file
 import './index.css'
@@ -41,7 +42,7 @@ app.config.errorHandler = (err, vm, info) => {
   console.error('Global error:', err)
   console.error('Error info:', info)
 }
-
+app.component('AppModal', AppModal)
 // Use plugins
 app.use(createPinia())
 app.use(router)
